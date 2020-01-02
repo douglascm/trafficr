@@ -1,0 +1,19 @@
+Package: trafficr
+Title: Traffic Assignment Methods
+Version: 0.1.0
+Authors@R: person("Douglas", "Martins", email="douglas.capelossi@gmail.com", role=c("aut", "cre"))
+Author: Douglas Martins [aut, cre]
+Maintainer: Douglas Martins <douglas.capelossi@gmail.com>
+Description: R package for obtaining the user equilibrium solution with Frank-Wolfe Algorithm in urban traffic assignment, 
+	heavely based on 'dodgr' package for all-or-nothing assignment, route and time data.
+Depends: R (>= 3.6.0)
+Imports: dplyr,tidyr,data.table,sf,sp,dodgr,stringi,readr,tmap,matrixcalc,callr, digest, igraph, magrittr, methods,
+		osmdata, rbenchmark,Rcpp (>= 0.12.6), RcppParallel
+Suggests: ggplot2, igraphdata, jsonlite, knitr, purrr,
+        RColorBrewer, rmarkdown, roxygen2, scales, tidygraph
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
+URL: http://github.com/douglascm/trafficr
+BugReports: http://github.com/douglascm/trafficr

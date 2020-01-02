@@ -1,0 +1,123 @@
+---
+title: "trafficr"
+author: "douglascm"
+date: "1/2/2020"
+output: html_document
+df_print: paged
+---
+
+```{r load, include = FALSE, eval = TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(trafficr)
+```
+# Traffic Assignment Package
+trafficr is a package for static traffic assignment R code. Currently, the program can solve the static traffic assignment problem using user equilibrium (UE) for the city network. The solution is achieved using the Frank-Wolfe algorithm.
+
+## How to run traffic assignment
+Following steps explain the setup and how to run the procedures and extract flows and maps.
+
+### 1. Install the R package with: 
+```{r install, eval=FALSE}
+install_github("douglascm/trafficr")
+```
+
+### 2. Data Preparation : 
+Import into the current environment all three required datasets:
+
+- *demand* tabular data containing demand data for each origin and destination:
+```{r demand load, eval=FALSE}
+demand <- fread("path to file")
+```
+    - Required columns:
+        - orig: origin id (integer)
+        - dest: destination id (integer)
+```{r demand}
+head(sioux_demand)
+```
+- *network* sf object data containing road network:
+```{r network load, eval=FALSE}
+network <- st_read("path to file")
+```
+    - Required columns:
+        - id_link: link id (integer)
+        - ffs_fw: forward free flow speed in km/h (numeric)
+        - ffs_bw: backward free flow speed in km/h (numeric)
+        - cap_fw: forward link capacity in veh/h (numeric)
+        - cap_bw: backward link capacity in veh/h (numeric)
+    - Optional columns:
+        - addv_fw: forward additional cost (numeric)
+        - addv_bw: backward additional cost (numeric)
+        - wg_fw: forward cost weight (numeric)
+        - wg_bw: backward cost weight (numeric)
+        - alpha: alpha BPR function parameter (numeric)
+        - beta: beta BPR function parameter (numeric)
+        - cost: actual network cost, used instead of geometric distance and speed (numeric)
+```{r network}
+head(sioux_network)
+```
+- *zones* sf object data containing zones to be added to road network:
+```{r zones load, eval=FALSE}
+zones <- st_read("path to file")
+```
+    - Required columns:
+        - id_zone: link id (integer)
+        - longitude: Longitude in WGS84 (numeric)
+        - latitude: Latitude in WGS84 (numeric)
+```{r zones}
+head(sioux_zones)
+```
+
+### 3. Running the code :
+Use the following methods to perform operations:
+
+`configure_graph()` Tranforms network data from source network and zones and outputs a list with 2 elemens, 1 being the graph and 2 being the transformed zones:
+```{r configure graph, eval=FALSE}
+configure_graph(network,zones,turn_penalty,left_side,addvalue_cols,weighted,performance_measures,use_cost_col)
+```
+- *network*: sf object containing network data
+- *zones*: sf object containing zone data
+- *turn_penalty*: Adds turn penalty (see dodgr documentation on turn penalty from function 'R/weight-streetnet.R')
+- *left_side*: Does traffic travel on the left side of the road (TRUE) or the right side (FALSE)? - only has effect on turn angle calculations for edge times. (see dodgr documentation on turn penalty from function 'R/weight-streetnet.R')
+- *addvalue_cols*: Does network shapefile has columns 'addv_fw' and 'addv_bw' for added cost in links? (TRUE) or (FALSE)
+- *weighted*: Does network shapefile has columns 'wg_fw' and 'wg_bw' for a cost multiplication factor in links? (TRUE) or (FALSE)
+- *performance_measures*: Does network shapefile has columns 'alpha' and 'beta' for usage on BPR funcion? (TRUE) or (FALSE)
+- *use_cost_col*: Use cost column as cost (opposite to speed and distance)? (TRUE) or (FALSE)
+
+`configure_demand()` Tranforms demand data from source origin and destination to match origin and destination from graph/zone objects:
+```{r configure demand, eval=FALSE}
+configure_demand(demand,zones)
+```
+- *demand*: demand data
+- *zones*: zones object created with configure_graph()
+
+`solve_ue()` Solve the traffic flow assignment model (user equilibrium) by Frank-Wolfe algorithm (all the necessary data must be  properly input into the model in advance).
+```{r solve ue, eval=FALSE}
+solve_ue(graph,demand,col,max_iterations)
+```
+- *graph*: Graph object created with configure_graph() function
+- *demand*: Demand object created with configure_demand() function
+- *col*: Column from demand file selected for assignment
+- *max_iterations*: Maximum number of iterations for Frank-Wolfe algorithm
+
+Next is an example of the structure to run the entire code, with additional functions that are documented inside R:
+```{r example}
+flist <- configure_graph(sioux_network,sioux_zones,use_cost_col=TRUE)
+
+graph <- flist[[1]]
+zones <- flist[[2]]
+demand <- configure_demand(sioux_demand,zones)
+
+graph <- solve_ue(graph,demand,col = 'demand')
+times <- get_times(graph,demand)
+paths <- get_paths(graph,demand)
+
+network <- graph_to_sf(graph,sioux_network)
+plot_flowmap(network,show_labels = T)
+```
+
+## Questions
+Feel free to send an email to [capelossi@usp.br](capelossi@usp.br) if you have questions or concerns.
+
+
+## Future releases
+Future releases will have an implementation of other traffic assignment algorithms such as Gradient Projection, Origin-based assignment, and Algorithm B. 
