@@ -23,8 +23,9 @@ Following steps explain the setup and how to run the procedures and extract flow
 
 ### 1. Install the R package with: 
 ```{r install, eval=FALSE}
-install_github("douglascm/trafficr")
+devtools::install_github("douglascm/trafficr")
 ```
+Package devtools is required for the installation, install with `install.packages('devtools')`
 
 ### 2. Data Preparation : 
 Import into the current environment all three required datasets:

@@ -18,8 +18,11 @@ extract flows and maps.
 ### 1\. Install the R package with:
 
 ``` r
-install_github("douglascm/trafficr")
+devtools::install_github("douglascm/trafficr")
 ```
+
+Package devtools is required for the installation, install with
+`install.packages('devtools')`
 
 ### 2\. Data Preparation :
 
@@ -192,8 +195,8 @@ zones <- flist[[2]]
 demand <- configure_demand(sioux_demand,zones)
 
 graph <- solve_ue(graph,demand,col = 'demand')
-#> Number of iterations: 38
-#> Time elapsed: 1.5s
+#> Number of iterations: 32
+#> Time elapsed: 1.26s
 times <- get_times(graph,demand)
 paths <- get_paths(graph,demand)
 
