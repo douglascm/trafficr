@@ -192,8 +192,8 @@ zones <- flist[[2]]
 demand <- configure_demand(sioux_demand,zones)
 
 graph <- solve_ue(graph,demand,col = 'demand')
-#> Number of iterations: 33
-#> Time elapsed: 1.3s
+#> Number of iterations: 38
+#> Time elapsed: 1.5s
 times <- get_times(graph,demand)
 paths <- get_paths(graph,demand)
 
@@ -207,8 +207,9 @@ plot_flowmap(network,show_labels = T)
 
 ## Questions
 
-Feel free to send an email to [capelossi@usp.br](capelossi@usp.br) if
-you have questions or concerns.
+Feel free to send an email to
+[douglas.capelossi@gmail.com](douglas.capelossi@gmail.com) if you have
+questions or concerns.
 
 ## Future releases
 
