@@ -13,7 +13,7 @@ the Frank-Wolfe algorithm.
 ## How to run traffic assignment
 
 Following steps explain the setup and how to run the procedures and
-extract flows and maps
+extract flows and maps.
 
 ### 1\. Install the R package with:
 
@@ -195,8 +195,8 @@ zones <- flist[[2]]
 demand <- configure_demand(sioux_demand,zones)
 
 graph <- solve_ue(graph,demand,col = 'demand')
-#> Number of iterations: 35
-#> Time elapsed: 1.39s
+#> Number of iterations: 50
+#> Time elapsed: 1.97s
 times <- get_times(graph,demand)
 paths <- get_paths(graph,demand)
 
