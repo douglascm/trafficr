@@ -7,8 +7,10 @@ douglascm
 
 trafficr is a package for static traffic assignment R code. Currently,
 the program can solve the static traffic assignment problem using user
-equilibrium (UE) for the city network. The solution is achieved using
-the Frank-Wolfe algorithm.
+equilibrium (UE) for the city network in urban traffic assignment. The
+solution is achieved using the Frank-Wolfe algorithm. Package is based
+on [*dodgr*](https://atfutures.github.io/dodgr/index.html) package for
+all-or-nothing assignment, route and time data.
 
 ## How to run traffic assignment
 
@@ -195,8 +197,8 @@ zones <- flist[[2]]
 demand <- configure_demand(sioux_demand,zones)
 
 graph <- solve_ue(graph,demand,col = 'demand')
-#> Number of iterations: 50
-#> Time elapsed: 1.97s
+#> Number of iterations: 39
+#> Time elapsed: 1.53s
 times <- get_times(graph,demand)
 paths <- get_paths(graph,demand)
 
