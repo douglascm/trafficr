@@ -2,12 +2,17 @@
 title: "trafficr"
 author: "douglascm"
 date: "1/2/2020"
-output: html_document
+output: github_document
 df_print: paged
 ---
 
 ```{r load, include = FALSE, eval = TRUE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
 library(trafficr)
 ```
 # Traffic Assignment Package
@@ -120,4 +125,4 @@ Feel free to send an email to [capelossi@usp.br](capelossi@usp.br) if you have q
 
 
 ## Future releases
-Future releases will have an implementation of other traffic assignment algorithms such as Gradient Projection, Origin-based assignment, and Algorithm B. 
+Future releases will have an implementation of other traffic assignment algorithms such as Gradient Projection, Origin-based assignment, and Algorithm B.
