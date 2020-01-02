@@ -19,7 +19,7 @@ library(trafficr)
 trafficr is a package for static traffic assignment R code. Currently, the program can solve the static traffic assignment problem using user equilibrium (UE) for the city network. The solution is achieved using the Frank-Wolfe algorithm.
 
 ## How to run traffic assignment
-Following steps explain the setup and how to run the procedures and extract flows and maps.
+Following steps explain the setup and how to run the procedures and extract flows and maps
 
 ### 1. Install the R package with: 
 ```{r install, eval=FALSE}
