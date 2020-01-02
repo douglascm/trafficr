@@ -9,7 +9,7 @@
 #'
 #' @param flow Past iteration calculated traffic flow
 #' @param new_flow Current iteration calculated traffic flow
-#' @param accuracy Error accuracy value. The accuracy is suggested to be set as 1e-5.
+#' @param accuracy Error accuracy value. The accuracy is suggested to be set as 1e-6.
 #' 
 #' @importFrom matrixcalc frobenius.norm
 #'
@@ -17,7 +17,7 @@
 #'
 #' @export
 
-is_convergent <- function(flow, new_flow, accuracy=1E-5){
+is_convergent <- function(flow, new_flow, accuracy=1E-6){
 
    err <- frobenius.norm(flow - new_flow) / frobenius.norm(flow)
 
