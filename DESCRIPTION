@@ -7,7 +7,7 @@ Maintainer: Douglas Martins <douglas.capelossi@gmail.com>
 Description: R package for obtaining the user equilibrium solution with Frank-Wolfe Algorithm in urban traffic assignment, 
 	heavily based on 'dodgr' package for all-or-nothing assignment, route and time data.
 Depends: R (>= 3.6.0)
-Imports: dplyr,tidyr,data.table,sf,sp,dodgr,stringi,readr,tmap,matrixcalc,callr, digest, igraph, magrittr, methods,
+Imports: dplyr,tidyr,data.table,sf,sp,dodgr(==0.2.0),stringi,readr,tmap,matrixcalc,callr, digest, igraph, magrittr, methods,
 		osmdata, rbenchmark,Rcpp (>= 0.12.6), RcppParallel
 Suggests: ggplot2, igraphdata, jsonlite, knitr, purrr,
         RColorBrewer, rmarkdown, roxygen2, scales, tidygraph
