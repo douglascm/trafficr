@@ -4,14 +4,14 @@
 \alias{is_convergent}
 \title{Convergency test}
 \usage{
-is_convergent(flow, new_flow, accuracy = 1e-05)
+is_convergent(flow, new_flow, accuracy = 1e-06)
 }
 \arguments{
 \item{flow}{Past iteration calculated traffic flow}
 
 \item{new_flow}{Current iteration calculated traffic flow}
 
-\item{accuracy}{Error accuracy value. The accuracy is suggested to be set as 1e-5.}
+\item{accuracy}{Error accuracy value. The accuracy is suggested to be set as 1e-6.}
 }
 \value{
 Boolen (TRUE) or (FALSE)
